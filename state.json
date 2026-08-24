@@ -1,4 +1,455 @@
 {
-  "volumeHistory": {},
+  "volumeHistory": {
+    "tether": [
+      68475119431
+    ],
+    "bitcoin": [
+      37206585075
+    ],
+    "ethereum": [
+      18498862276
+    ],
+    "usd-coin": [
+      17932551852
+    ],
+    "ripple": [
+      5788566479
+    ],
+    "solana": [
+      4288815733
+    ],
+    "zcash": [
+      1349802126
+    ],
+    "usd1-wlfi": [
+      1069728022
+    ],
+    "binancecoin": [
+      1028038957
+    ],
+    "dogecoin": [
+      1019900516
+    ],
+    "hyperliquid": [
+      929881223
+    ],
+    "official-trump": [
+      922428411
+    ],
+    "sui": [
+      792169766
+    ],
+    "aave": [
+      738793460
+    ],
+    "ethena": [
+      639049343
+    ],
+    "cardano": [
+      591532900
+    ],
+    "uniswap": [
+      559944408
+    ],
+    "pudgy-penguins": [
+      541421749
+    ],
+    "chainlink": [
+      515501909
+    ],
+    "ripple-usd": [
+      452733551
+    ],
+    "near": [
+      450773059
+    ],
+    "pyth-network": [
+      442565535
+    ],
+    "pepe": [
+      426149955
+    ],
+    "tron": [
+      400984138
+    ],
+    "litecoin": [
+      388603505
+    ],
+    "global-dollar": [
+      350418418
+    ],
+    "pump-fun": [
+      323366818
+    ],
+    "dai": [
+      310184657
+    ],
+    "stellar": [
+      297183323
+    ],
+    "avalanche-2": [
+      274521115
+    ],
+    "bittensor": [
+      265802205
+    ],
+    "tether-gold": [
+      251129646
+    ],
+    "bitcoin-cash": [
+      241563881
+    ],
+    "worldcoin-wld": [
+      221774859
+    ],
+    "ondo-finance": [
+      210149924
+    ],
+    "first-digital-usd": [
+      206348013
+    ],
+    "united-stables": [
+      179509871
+    ],
+    "lighter": [
+      177455443
+    ],
+    "pax-gold": [
+      175155161
+    ],
+    "tutorial": [
+      174253461
+    ],
+    "little-john": [
+      167501374
+    ],
+    "aster-2": [
+      161930332
+    ],
+    "whitebit": [
+      156796340
+    ],
+    "virtual-protocol": [
+      148838422
+    ],
+    "plasma": [
+      125788269
+    ],
+    "dash": [
+      124662599
+    ],
+    "polygon-ecosystem-token": [
+      121508387
+    ],
+    "injective-protocol": [
+      117360888
+    ],
+    "shiba-inu": [
+      116856473
+    ],
+    "ether-fi": [
+      112022386
+    ],
+    "polkadot": [
+      111918962
+    ],
+    "hedera-hashgraph": [
+      111588081
+    ],
+    "usds": [
+      102977242
+    ],
+    "pendle": [
+      100092562
+    ],
+    "spark-2": [
+      99202493
+    ],
+    "fetch-ai": [
+      98216950
+    ],
+    "morpho": [
+      94290566
+    ],
+    "monero": [
+      92766831
+    ],
+    "fidelity-digital-dollar": [
+      91954184
+    ],
+    "prometeus": [
+      91763977
+    ],
+    "arbitrum": [
+      87385248
+    ],
+    "aptos": [
+      79317718
+    ],
+    "maya-preferred-223": [
+      77670615
+    ],
+    "curve-dao-token": [
+      76817753
+    ],
+    "world-liberty-financial": [
+      73977418
+    ],
+    "layerzero": [
+      71868036
+    ],
+    "filecoin": [
+      71358534
+    ],
+    "monad": [
+      70620720
+    ],
+    "lido-dao": [
+      68154291
+    ],
+    "ethena-usde": [
+      67207647
+    ],
+    "re": [
+      63257046
+    ],
+    "aerodrome-finance": [
+      62668861
+    ],
+    "ethereum-classic": [
+      62255750
+    ],
+    "paypal-usd": [
+      62052481
+    ],
+    "render-token": [
+      61477328
+    ],
+    "portal-2": [
+      59579244
+    ],
+    "grvt": [
+      58339314
+    ],
+    "dogwifcoin": [
+      55821109
+    ],
+    "bonk": [
+      55338190
+    ],
+    "internet-computer": [
+      54970140
+    ],
+    "mantle": [
+      54502622
+    ],
+    "htx-dao": [
+      53866983
+    ],
+    "book-of-meme": [
+      52639192
+    ],
+    "jito-governance-token": [
+      49694993
+    ],
+    "thorchain": [
+      49655963
+    ],
+    "jupiter-exchange-solana": [
+      48344995
+    ],
+    "pancakeswap-token": [
+      47991191
+    ],
+    "blockstack": [
+      47960223
+    ],
+    "optimism": [
+      46555036
+    ],
+    "storj": [
+      45754048
+    ],
+    "endurance": [
+      45563295
+    ],
+    "cash-cat": [
+      44526502
+    ],
+    "usdgo": [
+      44244715
+    ],
+    "fartcoin": [
+      43972968
+    ],
+    "kaito": [
+      43855621
+    ],
+    "the-open-network": [
+      42980762
+    ],
+    "okb": [
+      42907273
+    ],
+    "euro-coin": [
+      41391481
+    ],
+    "sei-network": [
+      38889236
+    ],
+    "cyberleek": [
+      38511819
+    ],
+    "eigenlayer": [
+      38212548
+    ],
+    "gala": [
+      37905812
+    ],
+    "grass": [
+      37314349
+    ],
+    "superfarm": [
+      36984112
+    ],
+    "rain": [
+      36566340
+    ],
+    "celestia": [
+      36042614
+    ],
+    "invesco-qqq-trust-bstocks-tokenized-stock": [
+      36018111
+    ],
+    "dgrid-ai": [
+      35976013
+    ],
+    "velvet": [
+      35870384
+    ],
+    "zora": [
+      35602582
+    ],
+    "chiliz": [
+      35279090
+    ],
+    "algorand": [
+      34481485
+    ],
+    "origintrail": [
+      33944996
+    ],
+    "cosmos": [
+      33583533
+    ],
+    "usd-coinvertible": [
+      32058798
+    ],
+    "starknet": [
+      30971228
+    ],
+    "axie-infinity": [
+      30749361
+    ],
+    "floki": [
+      30464446
+    ],
+    "dappos": [
+      30240140
+    ],
+    "just": [
+      29924336
+    ],
+    "zama": [
+      29508457
+    ],
+    "weex-token": [
+      28283601
+    ],
+    "compound-governance-token": [
+      27936461
+    ],
+    "coti": [
+      27353952
+    ],
+    "the-graph": [
+      26119774
+    ],
+    "venice-token": [
+      25596026
+    ],
+    "derive": [
+      25440203
+    ],
+    "ethereum-name-service": [
+      25298973
+    ],
+    "niu-lai": [
+      24878572
+    ],
+    "havven": [
+      24576827
+    ],
+    "melania-meme": [
+      24154276
+    ],
+    "apecoin": [
+      24089391
+    ],
+    "sandisk-bstocks-tokenized-stock": [
+      23913782
+    ],
+    "canton-network": [
+      23893972
+    ],
+    "zencash": [
+      23721228
+    ],
+    "reserve-rights-token": [
+      23655067
+    ],
+    "interfold": [
+      23444325
+    ],
+    "1inch": [
+      22731413
+    ],
+    "aeon-3": [
+      22576072
+    ],
+    "purr-2": [
+      22399241
+    ],
+    "pons": [
+      22221202
+    ],
+    "crvusd": [
+      22148757
+    ],
+    "spacex-bstocks-tokenized-stock": [
+      21999350
+    ],
+    "the-sandbox": [
+      21954997
+    ],
+    "audiera": [
+      21912881
+    ],
+    "kucoin-shares": [
+      21615921
+    ],
+    "cap-4": [
+      21315311
+    ],
+    "falcon-finance-ff": [
+      20879038
+    ],
+    "decentraland": [
+      20738482
+    ],
+    "celer-network": [
+      20663614
+    ]
+  },
   "alerted": {}
 }
