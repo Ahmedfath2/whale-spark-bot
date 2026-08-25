@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Whale Spark — لوحة المتابعة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#050e16;
+    --surface:#0a1c28;
+    --surface-2:#0f2a33;
+    --line: rgba(242,165,51,0.16);
+    --teal:#1d4a52;
+    --amber:#f2a533;
+    --amber-bright:#ffcf6b;
+    --cyan:#4fd6c9;
+    --text:#eaf3f1;
+    --muted:#8aa3a0;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse at 20% -10%, rgba(242,165,51,0.07), transparent 45%),
+      radial-gradient(ellipse at 100% 0%, rgba(79,214,201,0.06), transparent 40%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    padding:32px 16px 80px;
+  }
+  .wrap{max-width:1000px;margin:0 auto;}
+  header{text-align:center;margin-bottom:32px;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;color:var(--amber);text-transform:uppercase;margin-bottom:10px;}
+  h1{
+    font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(28px,5vw,40px);margin:0 0 6px;
+    background:linear-gradient(180deg,#7fe8de,var(--amber));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .sub{color:var(--muted);font-size:13px;font-family:'JetBrains Mono',monospace;}
+
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px;}
+  @media(max-width:700px){.stat-grid{grid-template-columns:repeat(2,1fr);}}
+  .stat{
+    background:linear-gradient(160deg,var(--surface),var(--surface-2));
+    border:1px solid var(--line);border-radius:14px;padding:18px 16px;text-align:center;
+  }
+  .stat .num{font-family:'Playfair Display',serif;font-weight:800;font-size:26px;color:var(--amber-bright);}
+  .stat .label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px;}
+
+  .panel{
+    background:linear-gradient(160deg,var(--surface),var(--surface-2));
+    border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:20px;
+  }
+  .panel h2{font-family:'Playfair Display',serif;font-size:18px;margin:0 0 14px;color:var(--cyan);}
+
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--amber);text-align:right;padding:8px;border-bottom:1px solid var(--line);}
+  td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,0.05);}
+  tr:last-child td{border-bottom:none;}
+  .coin-name{font-weight:600;color:var(--text);}
+  .ratio-bar-bg{background:rgba(255,255,255,0.06);border-radius:6px;height:8px;overflow:hidden;width:100%;}
+  .ratio-bar{height:100%;background:linear-gradient(90deg,var(--cyan),var(--amber));border-radius:6px;}
+  .muted{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:12px;}
+  .empty{color:var(--muted);text-align:center;padding:20px;font-family:'JetBrains Mono',monospace;font-size:13px;}
+  .refresh-note{text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:24px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Whale Spark · Smart Money Momentum Bot</div>
+    <h1>لوحة المتابعة</h1>
+    <div class="sub" id="lastRun">جارٍ التحميل...</div>
+  </header>
+
+  <div class="stat-grid">
+    <div class="stat"><div class="num" id="statCoins">—</div><div class="label">عملة تحت المراقبة</div></div>
+    <div class="stat"><div class="num" id="statSamples">—</div><div class="label">قراءة مسجّلة إجمالًا</div></div>
+    <div class="stat"><div class="num" id="statAlerts">—</div><div class="label">تنبيه أُرسل حتى الآن</div></div>
+    <div class="stat"><div class="num" id="statRuns">—</div><div class="label">أكثر عملة راقبناها تاريخيًا</div></div>
+  </div>
+
+  <div class="panel">
+    <h2>أقرب العملات لعتبة الإشارة الآن</h2>
+    <table>
+      <thead><tr><th>العملة</th><th>آخر حجم</th><th>النسبة عن المتوسط</th><th></th></tr></thead>
+      <tbody id="topMoversBody"></tbody>
+    </table>
+    <div id="topMoversEmpty" class="empty" style="display:none;">لسه ما اتجمعش بيانات كافية للمقارنة</div>
+  </div>
+
+  <div class="panel">
+    <h2>سجل التنبيهات المُرسلة</h2>
+    <table>
+      <thead><tr><th>العملة</th><th>آخر تنبيه</th></tr></thead>
+      <tbody id="alertsBody"></tbody>
+    </table>
+    <div id="alertsEmpty" class="empty" style="display:none;">لسه ما اتبعتش أي تنبيه</div>
+  </div>
+
+  <div class="refresh-note">البيانات بتتحدّث كل ما البوت يشتغل (كل 15 دقيقة تقريبًا) — حدّث الصفحة يدويًا لرؤية آخر حالة</div>
+</div>
+
+<script>
+async function loadState() {
+  try {
+    const res = await fetch('./state.json?t=' + Date.now());
+    if (!res.ok) throw new Error('تعذّر تحميل state.json');
+    return res.json();
+  } catch (e) {
+    document.getElementById('lastRun').textContent = 'تعذّر تحميل البيانات — تأكد أن state.json موجود بجانب هذه الصفحة';
+    throw e;
+  }
+}
+
+function average(arr) {
+  if (!arr.length) return 0;
+  return arr.reduce((a, b) => a + b, 0) / arr.length;
+}
+
+function timeAgo(ms) {
+  const diff = Date.now() - ms;
+  const mins = Math.floor(diff / 60000);
+  if (mins < 60) return `منذ ${mins} دقيقة`;
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return `منذ ${hours} ساعة`;
+  const days = Math.floor(hours / 24);
+  return `منذ ${days} يوم`;
+}
+
+function formatVolume(v) {
+  if (v >= 1e9) return '$' + (v / 1e9).toFixed(2) + 'B';
+  if (v >= 1e6) return '$' + (v / 1e6).toFixed(2) + 'M';
+  if (v >= 1e3) return '$' + (v / 1e3).toFixed(1) + 'K';
+  return '$' + Math.round(v);
+}
+
+async function render() {
+  const state = await loadState();
+  const history = state.volumeHistory || {};
+  const alerted = state.alerted || {};
+
+  const coinIds = Object.keys(history);
+  const totalSamples = coinIds.reduce((sum, id) => sum + history[id].length, 0);
+  const alertCount = Object.keys(alerted).length;
+  const maxSamplesCoin = coinIds.reduce((max, id) =>
+    history[id].length > (history[max] ? history[max].length : 0) ? id : max, coinIds[0] || '—');
+
+  document.getElementById('statCoins').textContent = coinIds.length;
+  document.getElementById('statSamples').textContent = totalSamples.toLocaleString();
+  document.getElementById('statAlerts').textContent = alertCount;
+  document.getElementById('statRuns').textContent = maxSamplesCoin || '—';
+  document.getElementById('lastRun').textContent = state.lastRun
+    ? 'آخر تشغيل: ' + timeAgo(new Date(state.lastRun).getTime())
+    : `يراقب ${coinIds.length} عملة حاليًا`;
+
+  // أقرب العملات لعتبة الإشارة: نحسب نسبة آخر قراءة عن متوسط ما قبلها
+  const ranked = coinIds.map(id => {
+    const arr = history[id];
+    if (arr.length < 2) return null;
+    const last = arr[arr.length - 1];
+    const baseline = average(arr.slice(0, -1));
+    const ratio = baseline > 0 ? last / baseline : 0;
+    return { id, last, ratio };
+  }).filter(Boolean).sort((a, b) => b.ratio - a.ratio).slice(0, 15);
+
+  const topBody = document.getElementById('topMoversBody');
+  if (ranked.length === 0) {
+    document.getElementById('topMoversEmpty').style.display = 'block';
+  } else {
+    ranked.forEach(r => {
+      const pct = Math.min(100, (r.ratio / 6) * 100); // يعتبر 6x هو الامتلاء الكامل للبار
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="coin-name">${r.id}</td>
+        <td class="muted">${formatVolume(r.last)}</td>
+        <td>
+          <div class="ratio-bar-bg"><div class="ratio-bar" style="width:${pct}%"></div></div>
+        </td>
+        <td class="muted">${r.ratio.toFixed(2)}x</td>
+      `;
+      topBody.appendChild(tr);
+    });
+  }
+
+  const alertsBody = document.getElementById('alertsBody');
+  const alertEntries = Object.entries(alerted).sort((a, b) => b[1] - a[1]);
+  if (alertEntries.length === 0) {
+    document.getElementById('alertsEmpty').style.display = 'block';
+  } else {
+    alertEntries.forEach(([id, ts]) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td class="coin-name">${id}</td><td class="muted">${timeAgo(ts)}</td>`;
+      alertsBody.appendChild(tr);
+    });
+  }
+}
+
+render().catch(err => console.error(err));
+</script>
+</body>
+</html>
