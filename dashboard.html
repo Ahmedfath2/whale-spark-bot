@@ -93,7 +93,7 @@
   </div>
 
   <div class="panel">
-    <h2>عملات بمعروض منخفض (أقل من 100 مليون) — تصاعديًا</h2>
+    <h2>عملات بمعروض أقل من مليار وسعر أقل من 1$ — تصاعديًا</h2>
     <table>
       <thead><tr><th>العملة</th><th>الرمز</th><th>السعر</th><th>المعروض المتداول</th></tr></thead>
       <tbody id="lowSupplyBody"></tbody>
@@ -210,7 +210,7 @@ async function render() {
   // عملات بمعروض منخفض — قسم دائم، مستقل تمامًا عن التنبيهات
   const supplyData = state.supplyData || {};
   const lowSupplyList = Object.entries(supplyData)
-    .filter(([id, d]) => d.supply > 0 && d.supply < 100_000_000)
+    .filter(([id, d]) => d.supply > 0 && d.supply < 1_000_000_000 && d.price > 0 && d.price < 1)
     .sort((a, b) => a[1].supply - b[1].supply);
 
   const lowSupplyBody = document.getElementById('lowSupplyBody');
