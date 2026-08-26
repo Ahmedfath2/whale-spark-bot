@@ -114,7 +114,13 @@ async function main() {
 
     if (!state.volumeHistory[id]) state.volumeHistory[id] = [];
     const history = state.volumeHistory[id];
-
+    
+if (!state.supplyData) state.supplyData = {};
+        state.supplyData[id] = {
+          symbol: (coin.symbol || '').toUpperCase(),
+          name: coin.name,
+          supply: coin.circulating_supply || 0
+        };
     // تحقق من الشروط الأساسية قبل حتى النظر في التاريخ
     const passesLiquidity = volume >= CONFIG.MIN_DAILY_VOLUME_USD;
     const passesPriceMove = Math.abs(priceChange) >= CONFIG.MIN_PRICE_MOVE_PCT;
