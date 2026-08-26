@@ -117,9 +117,11 @@ async function main() {
     
 if (!state.supplyData) state.supplyData = {};
         state.supplyData[id] = {
-          symbol: (coin.symbol || '').toUpperCase(),
-          name: coin.name,
-          supply: coin.circulating_supply || 0
+  symbol: (coin.symbol || '').toUpperCase(),
+  name: coin.name,
+  supply: coin.circulating_supply || 0,
+  price: coin.current_price || 0
+};
         };
     // تحقق من الشروط الأساسية قبل حتى النظر في التاريخ
     const passesLiquidity = volume >= CONFIG.MIN_DAILY_VOLUME_USD;
