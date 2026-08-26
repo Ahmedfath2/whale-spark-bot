@@ -93,6 +93,15 @@
   </div>
 
   <div class="panel">
+    <h2>عملات بمعروض منخفض (أقل من 100 مليون) — تصاعديًا</h2>
+    <table>
+      <thead><tr><th>العملة</th><th>الرمز</th><th>المعروض المتداول</th></tr></thead>
+      <tbody id="lowSupplyBody"></tbody>
+    </table>
+    <div id="lowSupplyEmpty" class="empty" style="display:none;">لا توجد بيانات معروض مسجّلة بعد — ستظهر بعد أول تشغيل يلي تحديث index.js</div>
+  </div>
+
+  <div class="panel">
     <h2>سجل التنبيهات المُرسلة</h2>
     <table>
       <thead><tr><th>العملة</th><th>آخر تنبيه</th></tr></thead>
@@ -195,6 +204,27 @@ async function render() {
       const tr = document.createElement('tr');
       tr.innerHTML = `<td class="coin-name">${id}</td><td class="muted">${timeAgo(ts)}</td>`;
       alertsBody.appendChild(tr);
+    });
+  }
+
+  // عملات بمعروض منخفض — قسم دائم، مستقل تمامًا عن التنبيهات
+  const supplyData = state.supplyData || {};
+  const lowSupplyList = Object.entries(supplyData)
+    .filter(([id, d]) => d.supply > 0 && d.supply < 100_000_000)
+    .sort((a, b) => a[1].supply - b[1].supply);
+
+  const lowSupplyBody = document.getElementById('lowSupplyBody');
+  if (lowSupplyList.length === 0) {
+    document.getElementById('lowSupplyEmpty').style.display = 'block';
+  } else {
+    lowSupplyList.forEach(([id, d]) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="coin-name">${d.name || id}</td>
+        <td class="muted">${d.symbol || '—'}</td>
+        <td class="muted">${Math.round(d.supply).toLocaleString()}</td>
+      `;
+      lowSupplyBody.appendChild(tr);
     });
   }
 }
