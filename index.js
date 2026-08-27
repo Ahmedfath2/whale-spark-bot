@@ -122,7 +122,6 @@ if (!state.supplyData) state.supplyData = {};
   supply: coin.circulating_supply || 0,
   price: coin.current_price || 0
 };
-        };
     // تحقق من الشروط الأساسية قبل حتى النظر في التاريخ
     const passesLiquidity = volume >= CONFIG.MIN_DAILY_VOLUME_USD;
     const passesPriceMove = Math.abs(priceChange) >= CONFIG.MIN_PRICE_MOVE_PCT;
