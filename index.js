@@ -37,10 +37,25 @@ function saveJSON(p, data) {
 }
 
 async function fetchTopCoins() {
-  const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=volume_desc&per_page=${CONFIG.COINS_TO_SCAN}&page=1&price_change_percentage=24h&sparkline=false`;
-  const res = await fetch(url, { headers: { 'accept': 'application/json' } });
-  if (!res.ok) throw new Error(`CoinGecko markets fetch failed: ${res.status}`);
-  return res.json();
+  const urlByVolume = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=volume_desc&per_page=${CONFIG.COINS_TO_SCAN}&page=1&price_change_percentage_24h&sparkline=false`;
+  const urlByCap = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_asc&per_page=100&page=1&price_change_percentage_24h&sparkline=false`;
+
+  const [resVolume, resCap] = await Promise.all([
+    fetch(urlByVolume, { headers: { 'accept': 'application/json' } }),
+    fetch(urlByCap, { headers: { 'accept': 'application/json' } })
+  ]);
+  if (!resVolume.ok) throw new Error(`CoinGecko markets fetch failed: ${resVolume.status}`);
+
+  const byVolume = await resVolume.json();
+  const byCap = resCap.ok ? await resCap.json() : [];
+
+  // دمج القائمتين بدون تكرار (عشان نمسك عملات معروضها صغير حتى لو حجمها مش من الأعلى)
+  const merged = [...byVolume];
+  const existingIds = new Set(byVolume.map(c => c.id));
+  for (const coin of byCap) {
+    if (!existingIds.has(coin.id)) merged.push(coin);
+  }
+  return merged;
 }
 
 async function fetchCoinPlatforms(coinId) {
